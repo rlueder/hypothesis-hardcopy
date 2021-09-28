@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
 
-function App() {
+import { Annotations, Header, Results, Search } from "./components";
+
+import "./App.scss";
+
+import { getBook, getWorks } from "./utils";
+
+/**
+ * @name App
+ * @returns {JSX.Element}
+ */
+
+const App = () => {
+
+    const [annotations, setAnnotations] = useState([]);
+    const [data,setData] = useState(null);
+
+  useEffect(() => {
+      getBook(9780143111603).then((response) => setData(response));
+  }, []);
+
+  if(data && !Object.keys(data).length) {
+      return (
+          <div>Loading...</div>
+      )
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Header>
+            <Search />
+        </Header>
+        <Results data={data} setAnnotations={setAnnotations} />
+        <Annotations data={annotations} />
     </div>
   );
 }
