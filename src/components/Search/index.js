@@ -1,16 +1,48 @@
-import formik from "formik";
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+
+import { validate } from "../../utils/beautify-isbn";
 
 /**
  * @name Search
+ * @param {Object} props
  * @returns {JSX.Element}
  */
 
-// TODO add additional search parameters
-
-const Search = () => {
+const Search = (props) => {
+    const { setISBN } = props;
     return (
         <div className="Search">
-            <input />
+            <Formik
+                initialValues={{ isbn: ''}}
+                validate={values => {
+                    const errors = {};
+                    if (!values.isbn) {
+                        errors.isbn = 'ISBN is required';
+                    } else if (!validate(values.isbn)) {
+                        errors.isbn = 'Must be a valid ISBN-10 or ISBN-13';
+                    }
+                    return errors;
+                }}
+                onSubmit={(values, { setSubmitting }) => {
+                    setTimeout(() => {
+                        setSubmitting(false);
+                        setISBN(values.isbn);
+                    }, 400);
+                }}
+            >
+                {(props) => {
+                    const { isSubmitting } = props;
+                    return (
+                        <Form>
+                            <Field name="isbn" />
+                            <ErrorMessage name="isbn" component="div" />
+                            <button type="submit" disabled={isSubmitting}>
+                                Search
+                            </button>
+                        </Form>
+                    )
+                }}
+            </Formik>
         </div>
     )
 }

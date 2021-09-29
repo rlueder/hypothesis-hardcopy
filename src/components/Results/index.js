@@ -20,7 +20,11 @@ const Results = (props) => {
     }, [active, setAnnotations]);
 
     if(!data) {
-        return null
+        return (
+            <div className="Results">
+                <p>Search for a book by ISBN above.</p>
+            </div>
+        )
     }
 
     const { authors, description, imageLinks, industryIdentifiers, pageCount, publishedDate, publisher, title } = data;
@@ -43,7 +47,11 @@ const Results = (props) => {
                 <p>{description}</p>
                 <p>{publisher}, {publishedDate}</p>
                 <p>{pageCount} pages</p>
-                <p>{DOI}</p>
+                <p>
+                    <a href={`http://dx.doi.org/${DOI}`}>
+                        {DOI}
+                    </a>
+                </p>
             </div>
         </div>
     )

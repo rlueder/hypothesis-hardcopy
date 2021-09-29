@@ -15,10 +15,13 @@ const App = () => {
 
     const [annotations, setAnnotations] = useState([]);
     const [data,setData] = useState(null);
+    const [ISBN, setISBN] = useState("");
 
-  useEffect(() => {
-      getBook(9780143111603).then((response) => setData(response));
-  }, []);
+    useEffect(() => {
+      if(ISBN) {
+          getBook(ISBN).then((response) => setData(response));
+      }
+  }, [ISBN]);
 
   if(data && !Object.keys(data).length) {
       return (
@@ -29,7 +32,7 @@ const App = () => {
   return (
     <div className="App">
         <Header>
-            <Search />
+            <Search setISBN={setISBN} />
         </Header>
         <Results data={data} setAnnotations={setAnnotations} />
         <Annotations data={annotations} />
