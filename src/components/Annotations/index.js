@@ -12,7 +12,7 @@ import "./styles.scss";
  */
 
 const Annotations = (props) => {
-    const { data, doi, setAnnotations } = props;
+    const { data, doi, setAnnotations, style } = props;
 
     const renderForm = () => {
         return (
@@ -54,54 +54,63 @@ const Annotations = (props) => {
 
     if(!data.length) {
         return (
-            <div className="Annotations">
+            <div className="Annotations" style={{...style}}>
                 <h2>Annotations</h2>
-                <div>
-                    <p>There are no annotations for this item.</p>
-                    <p>Please log in to create annotations or highlights.</p>
+                <div className="Annotations__wrapper">
+                    <div>
+                        <p>There are no annotations for this item.</p>
+                        <p>Please log in to create annotations or highlights.</p>
+                    </div>
                 </div>
-                <section>
+                <footer>
+                    <h4>Add an Annotation</h4>
                     {renderForm()}
-                </section>
+                </footer>
             </div>
         )
     }
 
     return (
-        <div className="Annotations">
+        <div className="Annotations" style={{...style}}>
             <h2>Annotations</h2>
-            <ul className="Annotations__list">
-                {data?.map((annotation, i) => {
-                    const { created, permissions, target, text, user } = annotation;
-                    // created
-                    // links.incontext
-                    // permissions.read
-                    // text
-                    // uri
-                    // user
-                    // user_info.display_name
+            <div className="Annotations__wrapper" style={{ height: `calc(${style.height} - 2rem)`}}>
+                <ul className="Annotations__list">
+                    {data?.map((annotation, i) => {
+                        const {
+                            created,
+                            // permissions,
+                            // target,
+                            text,
+                            // uri,
+                            user } = annotation;
 
-                    // const selector = target[0].selector;
-                    // const highlight = selector[selector.length - 1].exact;
+                        // const selector = target[0].selector;
+                        // const highlight = selector[selector.length - 1].exact;
 
-                    const author = user.split("acct:")[1];
+                        const author = user.split("acct:")[1];
 
-                    return (
-                        <li className="Annotations__item" key={i}>
-                            <header>
-                                <p style={{ fontWeight: "bolder"}}>{author}</p>
-                                <p>{format(new Date(created), "MMM dd, yyyy")}</p>
-                            </header>
-                            <section>
-                                <p>{text}</p>
-                            </section>
-                        </li>
-                    )
-                })}
-            </ul>
-            <section>
+                        // TODO implement Edit, Delete, Reply and Share
+                        //  actions inside of footer
+
+                        return (
+                            <li className="Annotations__item" key={i}>
+                                <header>
+                                    <p style={{ fontWeight: "bolder"}}>{author}</p>
+                                    <p>{format(new Date(created), "MMM dd, yyyy")}</p>
+                                </header>
+                                <section>
+                                    <p>{text}</p>
+                                </section>
+                                <footer></footer>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
+            <footer>
+                <h4>Add an Annotation</h4>
                 {renderForm()}
-            </section>
+            </footer>
         </div>
     )
 }

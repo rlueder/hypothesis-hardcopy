@@ -1,5 +1,7 @@
+import { useEffect, useRef, useState } from "react";
 
 import { Annotations } from "../index";
+import { Info } from "./components";
 
 import { getDOI } from "../../utils";
 
@@ -12,24 +14,31 @@ import "./styles.scss";
  */
 
 const Results = (props) => {
-    const { annotations, data } = props;
+    const { annotations, data, setAnnotations } = props;
+
+    const section = useRef(undefined);
+    const [height, setHeight ] = useState(undefined);
+
+    useEffect(() => {
+        setHeight(section?.current?.offsetHeight)
+    });
 
     if(!data) {
         return (
             <div className="Results--empty">
-                <p>Search for a book by ISBN above.</p>
+                <p>Search for a book by ISBN-10 or ISBN-13 above.</p>
             </div>
         )
     }
 
-    const { authors, description, imageLinks, industryIdentifiers, pageCount, publishedDate, publisher, title } = data;
-
-    const src = imageLinks?.smallThumbnail?.replace("&edge=curl", "").replace("&zoom=5", "&zoom=1");
+    const { imageLinks, industryIdentifiers, title } = data;
 
     const ISBN = industryIdentifiers[0].identifier;
     const DOI = getDOI(ISBN);
 
-    const renderAuthors = () => authors.map((author, i) => <p key={i}>by {author}</p>);
+    const src = imageLinks?.smallThumbnail?.replace("&edge=curl", "").replace("&zoom=5", "&zoom=1");
+
+    const calcHeight = () => `${height / 2}px`;
 
     return (
         <div className="Results">
@@ -37,23 +46,9 @@ const Results = (props) => {
                 <aside>
                     <img src={src} alt={title} />
                 </aside>
-                <section>
-                    <div>
-                        <h1>{title}</h1>
-                        {renderAuthors()}
-                        <h4>Summary</h4>
-                        <p>{description}</p>
-                        <h4>Publisher</h4>
-                        <p>{publisher}, {publishedDate}</p>
-                        <p>{pageCount} pages</p>
-                        <h4>ISBN-A</h4>
-                        <p>
-                            <a href={`http://dx.doi.org/${DOI}`}>
-                                {DOI}
-                            </a>
-                        </p>
-                    </div>
-                    <Annotations data={annotations} doi={DOI} />
+                <section ref={section}>
+                    <Info data={data} doi={DOI} />
+                    <Annotations data={annotations} doi={DOI} setAnnotations={setAnnotations} style={{ height: calcHeight() }} />
                 </section>
             </div>
         </div>

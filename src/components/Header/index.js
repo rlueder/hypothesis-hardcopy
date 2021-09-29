@@ -1,10 +1,11 @@
 
-// import logo from "../../assets/img/logo.svg";
+import logo from "../../assets/img/logo.svg";
 
 import "./styles.scss";
 
 /**
  * @name Header
+ * @param {Object} props
  * @returns {JSX.Element}
  */
 
@@ -13,8 +14,8 @@ const Header = (props) => {
     return (
         <header className="Header">
             <section>
-                <div className="Header__logo">?.</div>
-                {/*<img alt="Hypothesis" src={logo} />*/}
+                {/*<div className="Header__logo">?.</div>*/}
+                <img alt="Hypothesis" src={logo} />
                 {children}
             </section>
         </header>

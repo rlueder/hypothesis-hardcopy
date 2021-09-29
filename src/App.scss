@@ -42,7 +42,7 @@ p {
 .App {
   height: inherit;
 
-  footer {
+  > footer {
     background-color: #202020;
     height: $footer_height;
   }

@@ -24,6 +24,7 @@ $header_height: 4.625rem;
   //cursor: pointer;
   display: flex;
   max-width: 50%;
+  overflow: hidden;
   padding: 1rem;
 
   aside {
@@ -36,6 +37,9 @@ $header_height: 4.625rem;
   }
 
   section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     margin-top: 1rem;
   }
 }

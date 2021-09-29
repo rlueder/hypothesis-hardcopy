@@ -6,13 +6,17 @@ $input_height: 3.5rem;
   button {
     background-color: #595959;
     border: initial;
-    //border-radius: .125rem;
     color: #fff;
     cursor: pointer;
     font-size: .875rem;
     //font-weight: bolder;
     height: $input_height;
     padding: 0 1rem;
+    width: 10rem;
+
+    &:hover {
+      background-color: darken(#595959, 10%);
+    }
   }
 
   form {

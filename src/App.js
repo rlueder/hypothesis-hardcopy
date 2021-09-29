@@ -26,8 +26,8 @@ const App = () => {
       if(ISBN) {
           getBook(ISBN).then((response) => {
               const DOI = getDOI(ISBN);
-              getAnnotations(DOI).then(response => setAnnotations(response.rows))
               setData(response);
+              getAnnotations(DOI).then(response => setAnnotations(response.rows))
           });
       }
   }, [ISBN]);
