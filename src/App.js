@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 
-import { Annotations, Header, Results, Search } from "./components";
+import { Header, Results, Search } from "./components";
 
 import "./App.scss";
 
-import { getBook, getWorks } from "./utils";
+import {getAnnotations, getBook, getDOI} from "./utils";
 
 /**
  * @name App
  * @returns {JSX.Element}
  */
+
+// TODO
+// - use https://hyp.is/ URL shortener to "host" DOI links if they don't
+// exist yet?
+// - preserve search status when refreshing, use hash URL with ISBN
 
 const App = () => {
 
@@ -19,7 +24,11 @@ const App = () => {
 
     useEffect(() => {
       if(ISBN) {
-          getBook(ISBN).then((response) => setData(response));
+          getBook(ISBN).then((response) => {
+              const DOI = getDOI(ISBN);
+              getAnnotations(DOI).then(response => setAnnotations(response.rows))
+              setData(response);
+          });
       }
   }, [ISBN]);
 
@@ -34,8 +43,8 @@ const App = () => {
         <Header>
             <Search setISBN={setISBN} />
         </Header>
-        <Results data={data} setAnnotations={setAnnotations} />
-        <Annotations data={annotations} />
+        <Results data={data} annotations={annotations} setAnnotations={setAnnotations} />
+        <footer />
     </div>
   );
 }

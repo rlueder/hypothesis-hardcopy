@@ -1,3 +1,8 @@
+
+// import logo from "../../assets/img/logo.svg";
+
+import "./styles.scss";
+
 /**
  * @name Header
  * @returns {JSX.Element}
@@ -6,11 +11,12 @@
 const Header = (props) => {
     const { children } = props;
     return (
-        <header>
-            <div>Logo</div>
-            <div>
+        <header className="Header">
+            <section>
+                <div className="Header__logo">?.</div>
+                {/*<img alt="Hypothesis" src={logo} />*/}
                 {children}
-            </div>
+            </section>
         </header>
     )
 }

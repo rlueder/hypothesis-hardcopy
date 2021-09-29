@@ -2,7 +2,7 @@ import {
     hyphenate,
     validate,
     toIsbn13
-} from "./beautify-isbn";
+} from "./isbn/beautify-isbn";
 
 /**
  * @name getDOI

@@ -1,0 +1,33 @@
+$header_height: 4.625rem;
+
+.Header {
+  border-bottom: 1px solid #dbdbdb;
+  display: flex;
+  height: $header_height;
+  justify-content: center;
+  padding: .625rem;
+
+  img {
+    margin-right: 1rem;
+  }
+
+  section {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+  }
+}
+
+.Header__logo {
+  align-items: center;
+  display: flex;
+  background-color: #000;
+  border-radius: 2px;
+  color: #fff;
+  font-weight: bolder;
+  height: 1.5rem;
+  justify-content: center;
+  margin-right: 1rem;
+  width: 1.5rem;
+}

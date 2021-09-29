@@ -1,6 +1,8 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
-import { validate } from "../../utils/beautify-isbn";
+import { validate } from "../../utils/isbn/beautify-isbn";
+
+import "./styles.scss";
 
 /**
  * @name Search
@@ -34,8 +36,8 @@ const Search = (props) => {
                     const { isSubmitting } = props;
                     return (
                         <Form>
-                            <Field name="isbn" />
-                            <ErrorMessage name="isbn" component="div" />
+                            <Field name="isbn" placeholder="Search for ISBN..." />
+                            {/*<ErrorMessage name="isbn" component="div" />*/}
                             <button type="submit" disabled={isSubmitting}>
                                 Search
                             </button>
