@@ -1,4 +1,4 @@
-import { hyphenate } from "./isbn/beautify-isbn";
+import { hyphenate } from "./beautify-isbn";
 
 /**
  * @name splitter

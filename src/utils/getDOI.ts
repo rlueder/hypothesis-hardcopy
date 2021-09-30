@@ -1,4 +1,4 @@
-import { toIsbn13, validate } from "./isbn/beautify-isbn";
+import { toIsbn13, validate } from "./beautify-isbn";
 
 import { printDOI, splitter } from "./index";
 

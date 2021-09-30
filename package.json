@@ -25,7 +25,7 @@
     "start": "BROWSER=none react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "ts-coverage": "typescript-coverage-report --strict --threshold=95 --ignore-files '**/*.js'"
+    "ts-coverage": "typescript-coverage-report --strict --threshold=95 --ignore-files 'src/utils/beautify-isbn/*'"
   },
   "dependencies": {
     "axios": "^0.21.4",

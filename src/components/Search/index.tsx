@@ -5,7 +5,7 @@ import {
   // ErrorMessage
 } from "formik";
 
-import { validate } from "../../utils/isbn/beautify-isbn";
+import { validate } from "../../utils/beautify-isbn";
 
 import "./styles.scss";
 
