@@ -1,4 +1,4 @@
-$input_height: 3.5rem;
+@import "../../assets/styles/variables";
 
 .Search {
   width: 100%;
@@ -8,7 +8,7 @@ $input_height: 3.5rem;
     border: initial;
     color: #fff;
     cursor: pointer;
-    font-size: .875rem;
+    font-size: 0.875rem;
     //font-weight: bolder;
     height: $input_height;
     padding: 0 1rem;

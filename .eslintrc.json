@@ -1,0 +1,22 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jest": true
+  },
+  "extends": ["react-app", "plugin:prettier/recommended"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "linebreak-style": ["error", "unix"],
+    "no-process-env": "off",
+    "no-unused-vars": "off"
+  }
+}

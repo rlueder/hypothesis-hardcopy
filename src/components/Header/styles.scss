@@ -1,11 +1,11 @@
-$header_height: 4.625rem;
+@import "../../assets/styles/variables";
 
 .Header {
   border-bottom: 1px solid #dbdbdb;
   display: flex;
   height: $header_height;
   justify-content: center;
-  padding: .625rem;
+  padding: 0.625rem;
 
   img {
     cursor: pointer;

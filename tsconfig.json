@@ -1,0 +1,31 @@
+{
+  "files": [
+    "assets.d.ts"
+  ],
+  "include": [
+    "src",
+    "types"
+  ],
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./src",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx",
+    "lib": [
+      "dom",
+      "es2020"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noFallthroughCasesInSwitch": true,
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "es2020",
+    "isolatedModules": true
+  }
+}
