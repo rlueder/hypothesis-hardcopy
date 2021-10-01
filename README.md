@@ -1,70 +1,133 @@
-# Getting Started with Create React App
+[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg?display=inline-block)](https://github.com/rlueder/tidytweets/blob/main/LICENSE)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# hypothesis-hardcopy
 
-## Available Scripts
+> Annotate your physical books through the Hypothesis service.
 
-In the project directory, you can run:
+`hypothesis-hardcopy` allows a reader of a physical book to add persistent 
+annotations through the Hypothesis service by entering a book's ISBN.
 
-### `npm start`
+Annotations created by other users will also be displayed as 
+`hypothesis-hardcopy` relies on the [ISBN-A standard](https://www.doi.org/factsheets/ISBN-A.html).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+For example, a book with a ISBN of `0201547775` (an older ISBN-10) will have 
+a persistent ISBN-A as `10.978.0201/547771` and the following DOI url: 
+[https://dx.doi.org/doi:10.978.0201/547771](https://dx.doi.org/doi:10.978.0201/547771)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The fact that the URL is not "registered" by the publisher (and probably 
+never will) doesn't stop a client application from using it as a query 
+parameter, in this case the Hypothesis API when requesting existing 
+annotations or creating new ones.
 
-### `npm test`
+I'd like to implement a few other features that are listed on the [project 
+board](https://github.com/rlueder/hypothesis-hardcopy/projects/1), to name a 
+few:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. support scanning of ISBN from the book instead of manual entry;
+2. support persistent hash URLs of a specific book;
+3. support the `RangeSelector`, `TextPositionSelector` and 
+   `TextQuoteSelector` from Hypothesis when creating an annotation;  
+4. use OCR to scan a passage from a book making adding a new annotation much 
+   easier (more of a nice-to-have).
 
-### `npm run build`
+## Table of Contents
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [1. Getting Started](#1-getting-started)
+  - [1.1 Prerequisites](#1.1-prerequisites)
+  - [1.2 Installing](#1.2-installing)
+  - [1.3 Running Locally](#1.3-running-locally)
+- [2. Testing](#2-testing)
+- [3. Deployment](#3-deployment)
+- [4. Built With](#4-built-with)
+- [5. Credits and Community](#5-credits-and-community)
+- [6. License](#6-license)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 1. Getting Started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### `npm run eject`
+### 1.1 Prerequisites
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+You'll need Node installed on your machine, the best way to install/manage Node versions is to use NVM.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [NVM](https://github.com/nvm-sh/nvm) - manage multiple node.js versions
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 1.2 Installing
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+$ npm install
+```
 
-## Learn More
+### 1.3 Running Locally
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Requests for fetching/saving annotations are sent directly to the Hypothesis 
+API.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**NOTE You'll need a Hypothesis API token for the project to run locally.**
 
-### Code Splitting
+You can access your [personal token here](https://hypothes.is/account/developer) Save it to a `.env` file as
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+`REACT_APP_HYPOTHESIS_TOKEN=token_value`
 
-### Analyzing the Bundle Size
+Once the token is in place start the application with:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+$ npm start
+```
 
-### Making a Progressive Web App
+The application will be available at [http://localhost:3000](http://localhost:3000)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 3. Testing
 
-### Advanced Configuration
+Unit and integration tests use Jest, you can run the interactive test monitor with the following command:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
+$ npm test
+```
 
-### Deployment
+You can read more about testing here:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- [CRA Running Tests](https://create-react-app.dev/docs/running-tests)
 
-### `npm run build` fails to minify
+- [Write tests. Not too many. Mostly integration.](https://kentcdodds.com/blog/write-tests)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [Static Type Checking](https://reactjs.org/docs/static-type-checking.html)
+
+## 4. Deployment
+
+This project uses CircleCI as a deployment tool, commits to `develop` or `main` 
+branches trigger a build which runs all tests and deploys to prod in case of a commit to `main`.
+
+You can read more about Netlify site deploys and SemVer here:
+
+- [Netlify deploys](https://docs.netlify.com/site-deploys/overview/)
+
+- [Semantic Versioning](https://semver.org/)
+
+## 5. Built With
+
+- [create-react-app](https://github.com/facebook/create-react-app) - create React apps with no build configuration.
+
+- [date-fns](https://github.com/date-fns/date-fns) - modern JavaScript date utility library.
+
+- [react-router](https://github.com/ReactTraining/react-router/) -
+  declarative routing for React.
+
+- [quaggaJS](https://github.com/serratus/quaggaJS) - an advanced 
+  barcode-scanner written in JavaScript.
+
+- [beautify-isbn](https://github.com/iceyouth/beautify-isbn) - a small 
+  package to make ISBN human-readable.
+
+- [Google Books APIs](https://developers.google.com/books/docs/v1/using#q) - 
+  for querying book information from the ISBN 
+
+## 6. Credits and Community
+
+This project exists thanks to all the <a href="https://github.com/rlueder/tidytweets/graphs/contributors">people who contribute</a>.
+
+- [Rafael Lüder](https://github.com/rlueder)
+
+## 7. License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
