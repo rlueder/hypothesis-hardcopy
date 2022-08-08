@@ -1,0 +1,27 @@
+{
+  "name": "hypothesis-hardcopy-vite",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "date-fns": "^2.29.1",
+    "formik": "^2.2.9",
+    "hypothesis": "^1.1087.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^2.0.0",
+    "sass": "^1.54.3",
+    "typescript": "^4.6.4",
+    "vite": "^3.0.0"
+  }
+}

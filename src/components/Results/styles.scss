@@ -1,0 +1,44 @@
+@import "../../assets/styles/variables";
+
+%results {
+  display: flex;
+  height: calc(100% - #{$header_height} - #{$footer_height});
+  justify-content: center;
+  padding: 1rem 0;
+  width: 100%;
+}
+
+.Results {
+  @extend %results;
+}
+
+.Results--empty {
+  @extend %results;
+  align-items: center;
+}
+
+.Results__item {
+  background-color: #ececec;
+  border-bottom: 1px solid #dbdbdb;
+  //cursor: pointer;
+  display: flex;
+  max-width: 50%;
+  overflow: hidden;
+  padding: 1rem;
+
+  aside {
+    margin-right: 1rem;
+  }
+
+  img {
+    border: 1px solid #2e2e2e;
+    width: inherit;
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+}

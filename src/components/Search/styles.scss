@@ -1,0 +1,40 @@
+@import "../../assets/styles/variables";
+
+.Search {
+  width: 100%;
+
+  button {
+    background-color: #595959;
+    border: initial;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.875rem;
+    //font-weight: bolder;
+    height: $input_height;
+    padding: 0 1rem;
+    width: 10rem;
+
+    &:hover {
+      background-color: darken(#595959, 10%);
+    }
+  }
+
+  form {
+    display: flex;
+    justify-content: space-between;
+    width: inherit;
+  }
+
+  input {
+    border: 1px solid #dbdbdb;
+    height: $input_height;
+    //margin-right: 1rem;
+    padding: 0 1rem;
+    width: 100%;
+
+    &:focus {
+      border: 1px solid #000;
+      outline: initial;
+    }
+  }
+}

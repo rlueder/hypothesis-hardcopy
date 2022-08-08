@@ -1,0 +1,53 @@
+@import "../../assets/styles/variables";
+
+.Annotations {
+  background-color: #ececec;
+  border-top: 1px solid rgba(#000, 0.1);
+  //margin-top: 2rem;
+  padding-top: 1rem;
+  position: relative;
+
+  > footer {
+    background-color: #ececec;
+    border-top: 1px solid #dbdbdb;
+    bottom: calc(-1rem - 1px); // compensate for padding-top of Annotations
+    margin-top: 1rem;
+    padding: 1rem;
+    position: absolute;
+    width: 100%;
+  }
+}
+
+.Annotations__list {
+  list-style: none;
+  margin: 0;
+  margin-bottom: calc(#{$footer_height} + 2rem);
+  margin-right: 1rem;
+  padding: 0;
+}
+
+.Annotations__item {
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 2px;
+  box-shadow: 0 1px 1px rgba(#000, 0.1);
+  margin-bottom: 1rem;
+  min-height: 10rem;
+  padding: 1rem;
+
+  header {
+    align-items: center;
+    display: flex;
+    font-size: 0.875rem;
+    justify-content: space-between;
+  }
+
+  &:hover {
+    box-shadow: 0 2px 3px 0 rgba(#000, 0.15);
+  }
+}
+
+.Annotations__wrapper {
+  margin-bottom: $footer_height;
+  overflow-y: auto;
+}

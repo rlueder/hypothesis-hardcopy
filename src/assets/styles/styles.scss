@@ -1,0 +1,46 @@
+@import "./normalize";
+@import "./variables";
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+#root {
+  height: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+h1,
+h2 {
+  margin-bottom: 1rem;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 0.5rem;
+}
+
+html {
+  //font-size: 13px;
+  font-weight: 400;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  height: 100vh;
+  line-height: 15px;
+}
+
+p {
+  line-height: 120%;
+  margin-bottom: 1rem;
+}
