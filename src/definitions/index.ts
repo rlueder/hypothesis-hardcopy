@@ -3,7 +3,7 @@
  * @type {Object}
  */
 
-export type Annotation = {
+export interface Annotation {
   id: string;
   created: string;
   updated: string;
@@ -41,7 +41,7 @@ export type Annotation = {
  * @type {Object}
  */
 
-export type BookInfo = {
+export interface BookInfo {
   authors: Array<Object>;
   description: string;
   imageLinks: {

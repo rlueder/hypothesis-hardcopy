@@ -17,8 +17,11 @@ const Info = (props: Props): JSX.Element => {
     data;
 
   const renderAuthors = () =>
-    // @ts-ignore
-    authors.map((author, i) => <p key={i}>by {author}</p>);
+    authors.map((author, i) => (
+      <p key={i}>
+        <>by ${author}</>
+      </p>
+    ));
 
   return (
     <div className="Book">

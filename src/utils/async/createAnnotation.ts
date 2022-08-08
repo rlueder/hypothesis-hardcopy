@@ -12,22 +12,24 @@ const TOKEN = import.meta.env.VITE_HYPOTHESIS_TOKEN;
  * @returns {Promise<any>}
  */
 
-const createAnnotation: Function = async (doi: string, text: string): Promise<any> => {
+const createAnnotation: Function = async (
+  doi: string,
+  text: string
+): Promise<any> => {
   try {
-    const response = await axios
-      .post(
-        "/annotations",
-        {
-          uri: doi,
-          text: text,
+    const response = await axios.post(
+      "/annotations",
+      {
+        uri: doi,
+        text: text,
+      },
+      {
+        baseURL: "https://api.hypothes.is/api",
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
         },
-        {
-          baseURL: "https://api.hypothes.is/api",
-          headers: {
-            Authorization: `Bearer ${TOKEN}`,
-          },
-        }
-      );
+      }
+    );
     return response;
   } catch (error) {
     console.log(error);

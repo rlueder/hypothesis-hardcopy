@@ -19,13 +19,13 @@ type Props = {
  * @returns {JSX.Element}
  */
 
-const Results = (props: Props) => {
+const Results = (props: Props): JSX.Element => {
   const { data } = props;
 
   const section = useRef<HTMLElement>(null);
   const [height, setHeight] = useState<number>(0);
 
-  useEffect(() => { // eslint-disable-line
+  useEffect(() => {
     if (section.current) {
       setHeight(section.current.offsetHeight);
     }
@@ -44,11 +44,13 @@ const Results = (props: Props) => {
   const ISBN = industryIdentifiers && industryIdentifiers[0].identifier;
   const DOI = getDOI(ISBN) || "";
 
+  // change style of Google Books thumbnail
   const src = imageLinks?.smallThumbnail
     ?.replace("&edge=curl", "")
     .replace("&zoom=5", "&zoom=1");
 
   const calcHeight = (height: number) => `${height / 2}px`;
+
   return (
     <div className="Results">
       <div className="Results__item">

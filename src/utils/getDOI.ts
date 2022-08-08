@@ -11,7 +11,7 @@ import { printDOI, splitter } from "./index";
  * @returns {string | null}
  */
 
-const getDOI = (isbn: string | null): string | null => {
+const getDOI: Function = (isbn: string | null): string | null => {
   // checks if ISBN is valid first
   if (isbn && validate(isbn)) {
     // ISBN-A requires a ISBN-13 starting point; convert if needed

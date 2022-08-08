@@ -13,9 +13,9 @@ const TOKEN = import.meta.env.VITE_HYPOTHESIS_TOKEN;
  * @returns {Promise<any>}
  */
 
-const getAnnotations = (doi: string): Promise<any> => {
-  return axios
-    .get("/search", {
+const getAnnotations: Function = async (doi: string): Promise<any> => {
+  try {
+    const response = await axios.get("/search", {
       baseURL: "https://api.hypothes.is/api",
       headers: {
         Authorization: `Bearer ${TOKEN}`,
@@ -23,17 +23,12 @@ const getAnnotations = (doi: string): Promise<any> => {
       params: {
         uri: doi,
       },
-    })
-    .then(
-      (response: {
-        data: {
-          rows: Annotation[];
-        };
-      }) => response.data.rows
-    )
-    .catch((error: Error) => {
-      console.log(error);
     });
+    const annotations: Annotation[] = response.data.rows;
+    return annotations;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export default getAnnotations;
