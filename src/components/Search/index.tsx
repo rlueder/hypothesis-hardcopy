@@ -24,19 +24,21 @@ type Props = {
 const Search = (props: Props): JSX.Element => {
   const { setISBN } = props;
 
+  const validateValues = (values: { isbn: string }) => {
+    const errors: FormErrors = {};
+    if (!values.isbn) {
+      errors.isbn = "ISBN is required";
+    } else if (!validate(values.isbn)) {
+      errors.isbn = "Must be a valid ISBN-10 or ISBN-13";
+    }
+    return errors;
+  };
+
   return (
     <div className="Search">
       <Formik
         initialValues={{ isbn: "" }}
-        validate={(values) => {
-          const errors: FormErrors = {};
-          if (!values.isbn) {
-            errors.isbn = "ISBN is required";
-          } else if (!validate(values.isbn)) {
-            errors.isbn = "Must be a valid ISBN-10 or ISBN-13";
-          }
-          return errors;
-        }}
+        validate={(values) => validateValues(values)}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             setSubmitting(false);
@@ -48,7 +50,7 @@ const Search = (props: Props): JSX.Element => {
           const { isSubmitting } = props;
           return (
             <Form>
-              <Field name="isbn" placeholder="Search for ISBN..." />
+              <Field name="isbn" placeholder="Search for ISBN..." type="tel" />
               {/*<ErrorMessage name="isbn" component="div" />*/}
               <button type="submit" disabled={isSubmitting}>
                 Search
