@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+
 import { isEmpty } from "lodash";
 
-import { Header, Results, Search } from "./components";
+import { Header, Results, Scanner, Search } from "./components";
+
+import { ISBNContext } from "./store";
 import { getBook } from "./utils";
 
 import type { BookInfo } from "./definitions";
@@ -15,7 +18,7 @@ import "./App.scss";
 
 const App = (): JSX.Element => {
   const [data, setData] = useState<BookInfo | null>(null);
-  const [ISBN, setISBN] = useState<string>("");
+  const { ISBN, setISBN } = useContext(ISBNContext);
 
   useEffect(() => {
     if (ISBN) {
@@ -30,7 +33,7 @@ const App = (): JSX.Element => {
   return (
     <div className="App">
       <Header>
-        <Search setISBN={setISBN} />
+        <Search />
       </Header>
       <Results data={data} />
       <footer />

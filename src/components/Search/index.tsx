@@ -1,3 +1,5 @@
+import { useContext } from "react";
+
 import {
   Formik,
   Form,
@@ -5,24 +7,23 @@ import {
   // ErrorMessage
 } from "formik";
 
+import { Link } from "react-router-dom";
+
 import { validate } from "../../utils/beautify-isbn";
 
 import type { FormErrors } from "../../definitions";
 
-import "./styles.scss";
+import { ISBNContext } from "../../store";
 
-type Props = {
-  setISBN: React.Dispatch<React.SetStateAction<any>>;
-};
+import "./styles.scss";
 
 /**
  * @name Search
- * @param {Object} props
  * @returns {JSX.Element}
  */
 
-const Search = (props: Props): JSX.Element => {
-  const { setISBN } = props;
+const Search = (): JSX.Element => {
+  const { setISBN } = useContext(ISBNContext);
 
   const validateValues = (values: { isbn: string }) => {
     const errors: FormErrors = {};
@@ -51,9 +52,13 @@ const Search = (props: Props): JSX.Element => {
           return (
             <Form>
               <Field name="isbn" placeholder="Search for ISBN..." type="tel" />
-              {/*<ErrorMessage name="isbn" component="div" />*/}
-              <button type="submit" disabled={isSubmitting}>
-                Search
+              <button disabled={isSubmitting} type="submit">
+                <span className="material-icons">search</span>
+              </button>
+              <button disabled={isSubmitting} type="submit">
+                <Link to="/scanner">
+                  <span className="material-icons">qr_code</span>
+                </Link>
               </button>
             </Form>
           );

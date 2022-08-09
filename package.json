@@ -14,9 +14,11 @@
     "axios": "^0.27.2",
     "date-fns": "^2.29.1",
     "formik": "^2.2.9",
+    "html5-qrcode": "^2.2.1",
     "hypothesis": "^1.1087.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",

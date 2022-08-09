@@ -1,17 +1,21 @@
-@import "../../assets/styles/variables";
+@import "../../assets/styles/styles";
 
 .Search {
   width: 100%;
 
   button {
+    align-items: center;
+    display: flex;
     background-color: #595959;
     border: initial;
+    border-left: 1px solid white;
     color: #fff;
     cursor: pointer;
     font-size: 0.875rem;
-    height: $input_height;
+    height: $input_size;
+    justify-content: center;
     padding: 0 1rem;
-    width: 10rem;
+    width: $input_size;
 
     &:hover {
       background-color: darken(#595959, 10%);
@@ -26,7 +30,7 @@
 
   input {
     border: 1px solid #dbdbdb;
-    height: $input_height;
+    height: $input_size;
     padding: 0 1rem;
     width: 100%;
 
