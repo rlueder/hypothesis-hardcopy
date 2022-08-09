@@ -1,12 +1,11 @@
-import axios from "axios";
+import { hypothesisClient } from "../index";
 
 import type { Annotation } from "../../definitions";
-
-const TOKEN = import.meta.env.VITE_HYPOTHESIS_TOKEN;
 
 /**
  * @async
  * @name getAnnotations
+ * @type {Function}
  * @summary Queries the Hypothesis API returning annotations for a DOI.
  * @see {@link https://h.readthedocs.io/en/latest/api-reference/#tag/annotations}
  * @param {string} doi
@@ -15,11 +14,7 @@ const TOKEN = import.meta.env.VITE_HYPOTHESIS_TOKEN;
 
 const getAnnotations: Function = async (doi: string): Promise<any> => {
   try {
-    const response = await axios.get("/search", {
-      baseURL: "https://api.hypothes.is/api",
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
+    const response = await hypothesisClient.get("/search", {
       params: {
         uri: doi,
       },

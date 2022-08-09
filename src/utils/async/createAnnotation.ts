@@ -1,14 +1,14 @@
-import axios from "axios";
+import { hypothesisClient } from "../index";
 
-const TOKEN = import.meta.env.VITE_HYPOTHESIS_TOKEN;
+import type { Annotation } from "../../definitions";
 
 /**
  * @async
  * @name createAnnotation
  * @type {Function}
+ * @see {@link https://h.readthedocs.io/en/latest/api-reference/v2/#tag/annotations/paths/~1annotations/post}
  * @param {string} doi
  * @param {string} text
- * @see {@link https://h.readthedocs.io/en/latest/api-reference/v2/#tag/annotations/paths/~1annotations/post}
  * @returns {Promise<any>}
  */
 
@@ -17,19 +17,10 @@ const createAnnotation: Function = async (
   text: string
 ): Promise<any> => {
   try {
-    const response = await axios.post(
-      "/annotations",
-      {
-        uri: doi,
-        text: text,
-      },
-      {
-        baseURL: "https://api.hypothes.is/api",
-        headers: {
-          Authorization: `Bearer ${TOKEN}`,
-        },
-      }
-    );
+    const response: Annotation = await hypothesisClient.post("/annotations", {
+      uri: doi,
+      text: text,
+    });
     return response;
   } catch (error) {
     console.log(error);
