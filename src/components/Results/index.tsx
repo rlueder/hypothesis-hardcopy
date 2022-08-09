@@ -5,9 +5,9 @@ import { Info } from "./components";
 
 import { getDOI } from "../../utils";
 
-import "./styles.scss";
-
 import type { BookInfo } from "../../definitions";
+
+import "./styles.scss";
 
 type Props = {
   data: BookInfo | null;
@@ -44,18 +44,13 @@ const Results = (props: Props): JSX.Element => {
   const ISBN = industryIdentifiers && industryIdentifiers[0].identifier;
   const DOI = getDOI(ISBN) || "";
 
-  // change style of Google Books thumbnail
-  const src = imageLinks?.smallThumbnail
-    ?.replace("&edge=curl", "")
-    .replace("&zoom=5", "&zoom=1");
-
   const calcHeight = (height: number) => `${height / 2}px`;
 
   return (
     <div className="Results">
       <div className="Results__item">
         <aside>
-          <img src={src} alt={title} />
+          <img src={imageLinks.smallThumbnail} alt={title} />
         </aside>
         <section ref={section}>
           <Info data={data} doi={DOI} />

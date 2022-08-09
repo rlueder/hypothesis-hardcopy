@@ -20,9 +20,15 @@ const getBook = async (isbn: string): Promise<any> => {
     const { data } = response;
 
     const volumeInfo = data.items[0].volumeInfo;
-    const idEntry = volumeInfo.industryIdentifiers[0];
+    const { imageLinks, industryIdentifiers } = volumeInfo;
+
+    // change default style of Google Books thumbnails
+    imageLinks.smallThumbnail
+      ?.replace("&edge=curl", "")
+      .replace("&zoom=5", "&zoom=1");
 
     // handle missing ISBN-13 or ISBN-10
+    const idEntry = industryIdentifiers[0];
     if (idEntry.type !== "ISBN_13" || "ISBN_10") {
       if (isbn.length === 13) {
         idEntry.type = "ISBN_13";
