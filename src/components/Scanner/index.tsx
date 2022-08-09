@@ -29,6 +29,7 @@ const Scanner = () => {
     scannerInstance.render(
       (decodedText, decodedResult) => {
         setISBN(decodedText);
+        scannerInstance.clear();
         navigate("/");
       },
       (error) => {
