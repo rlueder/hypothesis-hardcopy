@@ -1,3 +1,9 @@
 $input_height: 3.5rem;
 $footer_height: 3.75rem;
 $header_height: 4.625rem;
+
+$breakpoints: (
+  "small": 767px,
+  "medium": 992px,
+  "large": 1200px,
+);

@@ -1,10 +1,13 @@
-@import "../../assets/styles/variables";
+@use "sass:map";
+@import "../../assets/styles/styles";
 
 %results {
+  @media (min-width: map.get($breakpoints, "medium")) {
+    height: calc(100% - #{$header_height} - #{$footer_height});
+  }
+
   display: flex;
-  height: calc(100% - #{$header_height} - #{$footer_height});
   justify-content: center;
-  padding: 1rem 0;
   width: 100%;
 }
 
@@ -18,10 +21,13 @@
 }
 
 .Results__item {
+  @media (min-width: map.get($breakpoints, "medium")) {
+    display: flex;
+    width: 50%;
+  }
+
   background-color: #ececec;
   border-bottom: 1px solid #dbdbdb;
-  display: flex;
-  max-width: 50%;
   overflow: hidden;
   padding: 1rem;
 

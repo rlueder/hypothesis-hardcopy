@@ -1,4 +1,5 @@
-@import "../../assets/styles/variables";
+@use "sass:map";
+@import "../../assets/styles/styles";
 
 .Header {
   border-bottom: 1px solid #dbdbdb;
@@ -13,10 +14,14 @@
   }
 
   section {
+    @media (min-width: map.get($breakpoints, "medium")) {
+      width: 50%;
+    }
+
     align-items: center;
     display: flex;
     justify-content: space-between;
-    width: 50%;
+    width: 100%;
   }
 }
 
