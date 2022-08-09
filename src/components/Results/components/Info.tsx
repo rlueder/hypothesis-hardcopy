@@ -21,7 +21,7 @@ const Info = (props: Props): JSX.Element => {
       <h1>{title}</h1>
       {authors.map((author, i) => (
         <p key={i}>
-          <>by ${author}</>
+          <>by {author}</>
         </p>
       ))}
       <h4>Summary</h4>
