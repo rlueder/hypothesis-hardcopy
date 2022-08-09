@@ -26,3 +26,19 @@ const getDOI: Function = (isbn: string | null): string | null => {
 };
 
 export default getDOI;
+
+if (import.meta.vitest) {
+  const { it, expect } = import.meta.vitest;
+
+  it("generates a DOI from ISBN-10", () => {
+    expect(getDOI("0415319153")).toEqual("doi:10.978.0415/319157");
+  });
+
+  it("generates a DOI from ISBN-13", () => {
+    expect(getDOI("9780415319157")).toEqual("doi:10.978.0415/319157");
+  });
+
+  it("returns null for an invalid ISBN", () => {
+    expect(getDOI("1234567890")).toEqual(null);
+  });
+}
