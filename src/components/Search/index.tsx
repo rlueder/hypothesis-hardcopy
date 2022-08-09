@@ -7,9 +7,9 @@ import {
 
 import { validate } from "../../utils/beautify-isbn";
 
-import "./styles.scss";
-
 import type { FormErrors } from "../../definitions";
+
+import "./styles.scss";
 
 type Props = {
   setISBN: React.Dispatch<React.SetStateAction<any>>;

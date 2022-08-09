@@ -63,6 +63,6 @@ export interface BookInfo {
  * FormErrors
  */
 
-export type FormErrors = {
+export interface FormErrors {
   isbn?: string;
 };

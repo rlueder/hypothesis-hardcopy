@@ -9,9 +9,9 @@ import {
 
 import { format } from "date-fns";
 
-import type { Annotation } from "../../definitions";
-
 import { createAnnotation, getAnnotations } from "../../utils";
+
+import type { Annotation } from "../../definitions";
 
 import "./styles.scss";
 
@@ -106,7 +106,7 @@ const Annotations = (props: Props): JSX.Element => {
         style={{ height: `calc(${style.height} - 2rem)` }}
       >
         <ul className="Annotations__list">
-          {data?.map((annotation: Annotation, i) => {
+          {data?.map((annotation: Annotation, index) => {
             const {
               created,
               // permissions,
@@ -122,7 +122,7 @@ const Annotations = (props: Props): JSX.Element => {
             const author = user.split("acct:")[1];
 
             return (
-              <li className="Annotations__item" key={i}>
+              <li className="Annotations__item" key={index}>
                 <header>
                   <p style={{ fontWeight: "bolder" }}>{author}</p>
                   <p>{format(new Date(created), "MMM dd, yyyy")}</p>

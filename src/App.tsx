@@ -19,9 +19,7 @@ const App = (): JSX.Element => {
 
   useEffect(() => {
     if (ISBN) {
-      getBook(ISBN).then((response: BookInfo) => {
-        setData(response);
-      });
+      getBook(ISBN).then((response: BookInfo) => setData(response));
     }
   }, [ISBN]);
 

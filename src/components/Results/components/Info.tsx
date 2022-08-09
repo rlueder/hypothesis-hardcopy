@@ -16,17 +16,14 @@ const Info = (props: Props): JSX.Element => {
   const { authors, description, pageCount, publishedDate, publisher, title } =
     data;
 
-  const renderAuthors = () =>
-    authors.map((author, i) => (
-      <p key={i}>
-        <>by ${author}</>
-      </p>
-    ));
-
   return (
     <div className="Book">
       <h1>{title}</h1>
-      {renderAuthors()}
+      {authors.map((author, i) => (
+        <p key={i}>
+          <>by ${author}</>
+        </p>
+      ))}
       <h4>Summary</h4>
       <p>{description}</p>
       <h4>Publisher</h4>
