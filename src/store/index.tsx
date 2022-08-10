@@ -1,29 +1,33 @@
 import React, { createContext, useState } from "react";
 
-interface ISBNInterface {
-  ISBN: string;
-  setISBN: React.Dispatch<any>;
+import type { BookInfo } from "../definitions";
+
+interface SearchInterface {
+  results: BookInfo[];
+  setResults: React.Dispatch<any>;
 }
 
 /**
  * Contexts
  */
 
-export const ISBNContext = createContext<ISBNInterface>({} as ISBNInterface);
+export const SearchContext = createContext<SearchInterface>(
+  {} as SearchInterface
+);
 
 /**
- * @name ISBNProvider
+ * @name SearchProvider
  * @param {Object} props
  * @returns {JSX.Element}
  */
 
-export const ISBNProvider = (props: { children: any }): JSX.Element => {
+export const SearchProvider = (props: { children: any }): JSX.Element => {
   const { children } = props;
-  const [ISBN, setISBN] = useState<string>("");
+  const [results, setResults] = useState<BookInfo[]>([]);
   return (
-    <ISBNContext.Provider value={{ ISBN, setISBN }}>
+    <SearchContext.Provider value={{ results, setResults }}>
       {children}
-    </ISBNContext.Provider>
+    </SearchContext.Provider>
   );
 };
 
@@ -35,7 +39,7 @@ export const ISBNProvider = (props: { children: any }): JSX.Element => {
 
 const Store = (props: { children: any }): JSX.Element => {
   const { children } = props;
-  const providers = [ISBNProvider];
+  const providers = [SearchProvider];
   return (
     <>
       {providers.reduceRight((acc, Provider) => {

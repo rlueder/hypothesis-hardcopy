@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router-dom";
+
 import logo from "../../assets/img/logo.svg";
 
 import "./styles.scss";
 
 type Props = {
-  children: JSX.Element;
+  children?: JSX.Element;
 };
 
 /**
@@ -14,10 +16,11 @@ type Props = {
 
 const Header = (props: Props): JSX.Element => {
   const { children } = props;
+  const navigate = useNavigate();
   return (
     <header className="Header">
       <section>
-        <img alt="Hypothesis" src={logo} />
+        <img alt="Hypothesis" src={logo} onClick={() => navigate("/")} />
         {children}
       </section>
     </header>

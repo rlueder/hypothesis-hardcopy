@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import {
   Formik,
@@ -7,23 +7,27 @@ import {
   // ErrorMessage
 } from "formik";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { validate } from "../../utils/beautify-isbn";
 
 import type { FormErrors } from "../../definitions";
 
-import { ISBNContext } from "../../store";
+import { SearchContext } from "../../store";
+import { getBook } from "../../utils";
 
 import "./styles.scss";
 
 /**
  * @name Search
+ * @summary Takes user input on Search field,
+ * requests book information from Google Books and navigates user to book details.
  * @returns {JSX.Element}
  */
 
 const Search = (): JSX.Element => {
-  const { setISBN } = useContext(ISBNContext);
+  const { results, setResults } = useContext(SearchContext);
+  const navigateTo = useNavigate();
 
   const validateValues = (values: { isbn: string }) => {
     const errors: FormErrors = {};
@@ -40,11 +44,16 @@ const Search = (): JSX.Element => {
       <Formik
         initialValues={{ isbn: "" }}
         validate={(values) => validateValues(values)}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
+        onSubmit={async (values, { setSubmitting }) => {
+          const { isbn } = values;
+          try {
+            const response = await getBook(isbn);
+            setResults([...results, response]);
             setSubmitting(false);
-            setISBN(values.isbn);
-          }, 400);
+            navigateTo(`/books/${isbn}`);
+          } catch (err) {
+            console.error(err);
+          }
         }}
       >
         {(props) => {

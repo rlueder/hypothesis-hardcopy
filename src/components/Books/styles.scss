@@ -1,0 +1,33 @@
+@use "sass:map";
+@import "../../assets/styles/styles";
+
+%books {
+  @media (min-width: map.get($breakpoints, "medium")) {
+    height: calc(100% - #{$header_height} - #{$footer_height});
+  }
+
+  display: flex;
+  flex-direction: column;
+  height: inherit;
+  overflow-y: auto;
+  width: 100%;
+}
+
+/**
+ * Books
+ */
+
+.Books {
+  @extend %books;
+}
+
+.Books--empty {
+  @extend %books;
+
+  align-items: center;
+  padding: 1rem;
+
+  p {
+    text-align: center;
+  }
+}

@@ -1,4 +1,41 @@
-@import "../../assets/styles/variables";
+@use "sass:map";
+@import "../../assets/styles/styles";
+
+/**
+ * BookEntry
+ */
+
+.BookEntry {
+  @media (min-width: map.get($breakpoints, "medium")) {
+    display: flex;
+    width: 50%;
+  }
+
+  background-color: #ececec;
+  border-bottom: 1px solid #dbdbdb;
+  overflow-y: auto;
+  padding: 1rem;
+
+  aside {
+    margin-right: 1rem;
+  }
+
+  img {
+    border: 1px solid #2e2e2e;
+    width: inherit;
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+}
+
+/**
+ * Annotations
+ */
 
 .Annotations {
   background-color: #ececec;

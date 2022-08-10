@@ -1,7 +1,11 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { ISBNContext } from "../../store";
+import { Header } from "../../components";
+
+import { SearchContext } from "../../store";
+import { getBook } from "../../utils";
+
 import { getScannerInstance } from "./utils";
 
 import type { Html5QrcodeScanner } from "html5-qrcode";
@@ -13,14 +17,9 @@ import "./styles.scss";
  * @returns JSX.Element
  */
 
-// TODO
-// - hide camera selection while scanning
-// - always default to back camera
-// - repace Stop Scanning button with close button on top right corner
-
 const Scanner = () => {
-  const { ISBN, setISBN } = useContext(ISBNContext);
-  const navigate = useNavigate();
+  const { results, setResults } = useContext(SearchContext);
+  const navigateTo = useNavigate();
 
   const [scannerInstance, setScannerInstance] = useState<Html5QrcodeScanner>();
   const scannerId = "scanner";
@@ -36,9 +35,14 @@ const Scanner = () => {
         // start scanning
         scannerInstance.render(
           // on successful scan
-          (decodedText) => {
-            setISBN(decodedText);
-            navigate("/");
+          async (isbn) => {
+            try {
+              const response = await getBook(isbn);
+              setResults([...results, response]);
+              navigateTo(`/books/${isbn}`);
+            } catch (err) {
+              console.error(err);
+            }
           },
           (error) => {
             console.warn(`Code scan error = ${error}`);
@@ -52,7 +56,12 @@ const Scanner = () => {
     }
   }, [scannerRef.current]);
 
-  return <div id={scannerId} ref={scannerRef} />;
+  return (
+    <div className="Scanner">
+      <Header />
+      <div id={scannerId} ref={scannerRef} />
+    </div>
+  );
 };
 
 export default Scanner;

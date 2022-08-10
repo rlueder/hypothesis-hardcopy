@@ -3,12 +3,17 @@
 .Search {
   width: 100%;
 
+  a {
+    color: white;
+  }
+
   button {
     align-items: center;
     display: flex;
-    background-color: #595959;
+    background-color: #333;
     border: initial;
     border-left: 1px solid white;
+    // border-radius: .25rem;
     color: #fff;
     cursor: pointer;
     font-size: 0.875rem;
@@ -18,7 +23,7 @@
     width: $input_size;
 
     &:hover {
-      background-color: darken(#595959, 10%);
+      background-color: #666;
     }
   }
 
@@ -38,5 +43,9 @@
       border: 1px solid #000;
       outline: initial;
     }
+  }
+
+  span {
+    margin-top: 0.25rem;
   }
 }

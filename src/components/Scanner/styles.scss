@@ -1,3 +1,23 @@
+@import "../../assets/styles/styles";
+
+/**
+ * Scanner
+ */
+
+.Scanner {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  #scanner {
+    height: calc(100vh - #{$header_height});
+  }
+}
+
+/**
+ * html5-qrcode
+ */
+
 %button {
   border: none;
   color: #666;
@@ -98,7 +118,6 @@
 #scanner__dashboard_section {
   margin: 1rem;
   padding: 0 !important;
-  //   height: inherit;
 }
 
 #scanner__dashboard_section_csr {
@@ -106,7 +125,6 @@
 
   align-items: center;
   display: flex;
-  height: 10rem;
   justify-content: center;
 
   button {

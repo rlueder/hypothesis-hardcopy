@@ -1,0 +1,26 @@
+@use "sass:map";
+@import "../../assets/styles/styles";
+
+/**
+ * Home
+ */
+
+.Home {
+  height: inherit;
+}
+
+.Home__footer {
+  @media (max-width: map.get($breakpoints, "medium")) {
+    display: none;
+  }
+
+  background-color: #202020;
+  height: $footer_height;
+}
+
+.Home__section {
+  align-items: center;
+  display: flex;
+  height: calc(100vh - #{$header_height});
+  justify-content: center;
+}

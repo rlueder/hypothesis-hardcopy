@@ -9,15 +9,13 @@ import {
 
 import { format } from "date-fns";
 
-import { createAnnotation, getAnnotations } from "../../utils";
+import { createAnnotation, getAnnotations } from "../../../utils";
 
-import type { Annotation } from "../../definitions";
-
-import "./styles.scss";
+import type { Annotation } from "../../../definitions";
 
 type Props = {
   doi: string;
-  style: {
+  style?: {
     height: string;
   };
 };
@@ -103,7 +101,7 @@ const Annotations = (props: Props): JSX.Element => {
       <h2>Annotations</h2>
       <div
         className="Annotations__wrapper"
-        style={{ height: `calc(${style.height} - 2rem)` }}
+        // style={{ height: `calc(${style.height} - 2rem)` }}
       >
         <ul className="Annotations__list">
           {data?.map((annotation: Annotation, index) => {
