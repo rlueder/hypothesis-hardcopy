@@ -1,8 +1,10 @@
-import { useContext, useEffect } from "react";
-import { Html5QrcodeScanner, Html5QrcodeScanType } from "html5-qrcode";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { ISBNContext } from "../../store";
+import { getScannerInstance } from "./utils";
+
+import type { Html5QrcodeScanner } from "html5-qrcode";
 
 /**
  * @name Scanner
@@ -10,35 +12,39 @@ import { ISBNContext } from "../../store";
  */
 
 const Scanner = () => {
-  const scannerId = "scanner";
-
-  const { setISBN } = useContext(ISBNContext);
-
+  const { ISBN, setISBN } = useContext(ISBNContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const scannerInstance = new Html5QrcodeScanner(
-      scannerId,
-      {
-        fps: 10,
-        qrbox: { width: 250, height: 250 },
-        supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
-      },
-      true
-    );
-    scannerInstance.render(
-      (decodedText, decodedResult) => {
-        setISBN(decodedText);
-        scannerInstance.clear();
-        navigate("/");
-      },
-      (error) => {
-        console.warn(`Code scan error = ${error}`);
-      }
-    );
-  });
+  const [scannerInstance, setScannerInstance] = useState<Html5QrcodeScanner>();
+  const scannerId = "scanner";
+  const scannerRef = useRef(null);
 
-  return <div id={scannerId} />;
+  useEffect(() => {
+    // wait for node to be available
+    if (scannerRef.current) {
+      setScannerInstance(getScannerInstance(scannerId));
+
+      // start scanner instance
+      if (scannerInstance) {
+        scannerInstance.render(
+          // on successful scan
+          (decodedText) => {
+            setISBN(decodedText);
+            navigate("/");
+          },
+          (error) => {
+            console.warn(`Code scan error = ${error}`);
+          }
+        );
+        // clean up after scanning
+        return () => {
+          scannerInstance.clear();
+        };
+      }
+    }
+  }, [scannerRef.current]);
+
+  return <div id={scannerId} ref={scannerRef} />;
 };
 
 export default Scanner;
