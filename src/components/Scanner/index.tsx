@@ -6,10 +6,17 @@ import { getScannerInstance } from "./utils";
 
 import type { Html5QrcodeScanner } from "html5-qrcode";
 
+import "./styles.scss";
+
 /**
  * @name Scanner
  * @returns JSX.Element
  */
+
+// TODO
+// - hide camera selection while scanning
+// - always default to back camera
+// - repace Stop Scanning button with close button on top right corner
 
 const Scanner = () => {
   const { ISBN, setISBN } = useContext(ISBNContext);
@@ -22,10 +29,11 @@ const Scanner = () => {
   useEffect(() => {
     // wait for node to be available
     if (scannerRef.current) {
+      // assign scanner instance
       setScannerInstance(getScannerInstance(scannerId));
 
-      // start scanner instance
       if (scannerInstance) {
+        // start scanning
         scannerInstance.render(
           // on successful scan
           (decodedText) => {

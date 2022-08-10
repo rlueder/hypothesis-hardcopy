@@ -1,0 +1,129 @@
+%button {
+  border: none;
+  color: #666;
+  cursor: pointer;
+  height: 3rem;
+  padding: 0.5rem 1rem;
+}
+
+@mixin createBorder($direction) {
+  border-image-slice: 1;
+  box-sizing: border-box;
+  content: "";
+  position: absolute;
+  height: 100%;
+  left: 0;
+  width: 100%;
+
+  $gradient-direction: 0;
+  $border-style: 0.25rem solid;
+
+  @if $direction == bottom {
+    $gradient-direction: to bottom;
+    border-left: $border-style;
+    border-right: $border-style;
+  }
+
+  @if $direction == right {
+    $gradient-direction: to right;
+    border-top: $border-style;
+    border-bottom: $border-style;
+  }
+
+  $stroke-width: 2rem;
+
+  border-image-source: linear-gradient(
+    $gradient-direction,
+    white $stroke-width,
+    transparent $stroke-width,
+    transparent calc(100% - $stroke-width),
+    white $stroke-width
+  );
+}
+
+#qr-shaded-region {
+  &::before {
+    @include createBorder(right);
+  }
+
+  &::after {
+    @include createBorder(bottom);
+  }
+
+  border-color: rgba(#000, 0.5) !important;
+  border-width: 2rem !important;
+  height: inherit;
+  position: relative;
+
+  // hides default outline on shaded overlay
+  > div {
+    display: none;
+  }
+}
+
+#scanner {
+  border: none !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+
+  > div {
+    // target credits div
+    &:first-of-type {
+      display: none;
+    }
+  }
+}
+
+#scanner__camera_permission_button {
+  @extend %button;
+}
+
+#scanner__dashboard {
+  //   background-color: yellow;
+
+  align-items: center;
+  display: flex;
+}
+
+#scanner__scan_region {
+  //   background-color: green;
+
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+#scanner__dashboard_section {
+  margin: 1rem;
+  padding: 0 !important;
+  //   height: inherit;
+}
+
+#scanner__dashboard_section_csr {
+  //   background-color: red;
+
+  align-items: center;
+  display: flex;
+  height: 10rem;
+  justify-content: center;
+
+  button {
+    @extend %button;
+  }
+
+  > span {
+    margin-right: 0 !important;
+  }
+}
+
+#scanner__camera_selection {
+  border: 1px solid #999;
+  border-radius: 0;
+  color: #666;
+  height: 3rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  width: 100%;
+}
