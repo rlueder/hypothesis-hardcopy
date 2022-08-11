@@ -8,14 +8,20 @@ import Store from "./store";
 
 const root = document.getElementById("root") as HTMLElement;
 
-// TODO
+// TODO generic
 // - save SearchContext to local storage so it can be rehydrated
+// - add details to UI design, dark theme by default
+
+// TODO Books- and BookEntry-specific
 // - fetch annotations for BookEntry immediately after getting book information
 // - finish styling Books list of results
 // - finish styling BookEntry
 // - add navigation to Books from BookEntry
+
+// TODO annotation-specific
+// - authenticate with Hypothesis so users can save their own annotations
+// - use Hypothesis annotations as a way to populate Books? Use doi values from annotations to query Google Books API
 // - look at OCR integration (tesseract-js)
-// - add details to UI design, dark theme by default
 
 // TODO Scanner-specific
 // - hide camera selection while scanning

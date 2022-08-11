@@ -15,9 +15,7 @@ import type { Annotation } from "../../../definitions";
 
 type Props = {
   doi: string;
-  style?: {
-    height: string;
-  };
+  title: string;
 };
 
 /**
@@ -27,7 +25,7 @@ type Props = {
  */
 
 const Annotations = (props: Props): JSX.Element => {
-  const { doi, style } = props;
+  const { doi, title } = props;
 
   const [data, setData] = useState<Annotation[]>([]);
 
@@ -38,19 +36,19 @@ const Annotations = (props: Props): JSX.Element => {
   const renderForm = () => {
     return (
       <Formik
-        initialValues={{ annotation: "" }}
+        initialValues={{ text: "" }}
         validate={(values) => {
           const errors: Object = {};
-          if (!values.annotation) {
+          if (!values.text) {
             // @ts-ignore
-            errors.annotation = "Annotation can't be empty.";
+            errors.text = "Annotation can't be empty.";
           }
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             setSubmitting(false);
-            createAnnotation(doi, values.annotation).then(
+            createAnnotation(doi, title, values.text).then(
               (response: { status: number }) => {
                 if (response.status === 200) {
                   getAnnotations(doi).then((response: Annotation[]) =>
@@ -66,8 +64,8 @@ const Annotations = (props: Props): JSX.Element => {
           const { isSubmitting } = props;
           return (
             <Form>
-              <Field name="annotation" placeholder="Add your comment..." />
-              {/*<ErrorMessage name="annotation" component="div" />*/}
+              <Field name="text" placeholder="Add your comment..." />
+              {/*<ErrorMessage name="text" component="div" />*/}
               <button type="submit" disabled={isSubmitting}>
                 Add Annotation
               </button>
@@ -80,7 +78,7 @@ const Annotations = (props: Props): JSX.Element => {
 
   if (!data.length) {
     return (
-      <div className="Annotations" style={{ ...style }}>
+      <div className="Annotations">
         <h2>Annotations</h2>
         <div className="Annotations__wrapper">
           <div>
@@ -97,7 +95,7 @@ const Annotations = (props: Props): JSX.Element => {
   }
 
   return (
-    <div className="Annotations" style={{ ...style }}>
+    <div className="Annotations">
       <h2>Annotations</h2>
       <div
         className="Annotations__wrapper"
@@ -105,14 +103,7 @@ const Annotations = (props: Props): JSX.Element => {
       >
         <ul className="Annotations__list">
           {data?.map((annotation: Annotation, index) => {
-            const {
-              created,
-              // permissions,
-              // target,
-              text,
-              // uri,
-              user,
-            } = annotation;
+            const { created, text, user } = annotation;
 
             // const selector = target[0].selector;
             // const highlight = selector[selector.length - 1].exact;

@@ -74,7 +74,7 @@ const BookEntry = (): JSX.Element => {
         <p>
           <a href={`https://dx.doi.org/${DOI}`}>{DOI}</a>
         </p>
-        <Annotations doi={DOI} />
+        <Annotations doi={DOI} title={title} />
       </section>
     </div>
   );
