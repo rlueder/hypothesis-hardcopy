@@ -23,8 +23,8 @@ const getBook = async (isbn: string): Promise<any> => {
     const { imageLinks, industryIdentifiers } = volumeInfo;
 
     // change default style of Google Books thumbnails
-    imageLinks.smallThumbnail
-      ?.replace("&edge=curl", "")
+    imageLinks.smallThumbnail = imageLinks.smallThumbnail
+      .replace("&edge=curl", "")
       .replace("&zoom=5", "&zoom=1");
 
     // handle missing ISBN-13 or ISBN-10
