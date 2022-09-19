@@ -4,19 +4,19 @@ import type { Annotation } from "../../definitions";
 
 /**
  * @async
- * @name getAnnotations
+ * @name searchAnnotations
  * @type {Function}
  * @summary Queries the Hypothesis API returning annotations for a DOI.
  * @see {@link https://h.readthedocs.io/en/latest/api-reference/#tag/annotations}
- * @param {string} doi
+ * @param {string} uri
  * @returns {Promise<any>}
  */
 
-const getAnnotations: Function = async (doi: string): Promise<any> => {
+const searchAnnotations: Function = async (uri: string): Promise<any> => {
   try {
     const response = await hypothesisClient.get("/search", {
       params: {
-        uri: doi,
+        uri: uri,
       },
     });
     const annotations: Annotation[] = response.data.rows;
@@ -26,4 +26,4 @@ const getAnnotations: Function = async (doi: string): Promise<any> => {
   }
 };
 
-export default getAnnotations;
+export default searchAnnotations;

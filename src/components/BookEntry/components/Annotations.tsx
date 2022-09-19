@@ -9,7 +9,7 @@ import {
 
 import { format } from "date-fns";
 
-import { createAnnotation, getAnnotations } from "../../../utils";
+import { createAnnotation, searchAnnotations } from "../../../utils";
 
 import type { Annotation } from "../../../definitions";
 
@@ -29,9 +29,11 @@ const Annotations = (props: Props): JSX.Element => {
 
   const [data, setData] = useState<Annotation[]>([]);
 
+  const uri = `https://dx.doi.org/${doi}`;
+
   useEffect(() => {
-    getAnnotations(doi).then((response: Annotation[]) => setData(response));
-  }, [doi]);
+    searchAnnotations(uri).then((response: Annotation[]) => setData(response));
+  }, []);
 
   const renderForm = () => {
     return (
@@ -46,18 +48,20 @@ const Annotations = (props: Props): JSX.Element => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            setSubmitting(false);
-            createAnnotation(doi, title, values.text).then(
-              (response: { status: number }) => {
-                if (response.status === 200) {
-                  getAnnotations(doi).then((response: Annotation[]) =>
+          setSubmitting(false);
+          createAnnotation(uri, title, values.text).then(
+            (response: { status: number }) => {
+              if (response.status === 200) {
+                // Hypothesis doesn't immediately return the new annotation so we add a small delay
+                // before requesting all annotations
+                setTimeout(() => {
+                  searchAnnotations(uri).then((response: Annotation[]) =>
                     setData(response)
                   );
-                }
+                }, 1000);
               }
-            );
-          }, 400);
+            }
+          );
         }}
       >
         {(props) => {
@@ -81,10 +85,7 @@ const Annotations = (props: Props): JSX.Element => {
       <div className="Annotations">
         <h2>Annotations</h2>
         <div className="Annotations__wrapper">
-          <div>
-            <p>There are no annotations for this item.</p>
-            <p>Please log in to create annotations or highlights.</p>
-          </div>
+          <p>There are no annotations for this item.</p>
         </div>
         <footer>
           <h4>Add an Annotation</h4>
@@ -97,14 +98,10 @@ const Annotations = (props: Props): JSX.Element => {
   return (
     <div className="Annotations">
       <h2>Annotations</h2>
-      <div
-        className="Annotations__wrapper"
-        // style={{ height: `calc(${style.height} - 2rem)` }}
-      >
+      <div className="Annotations__wrapper">
         <ul className="Annotations__list">
           {data?.map((annotation: Annotation, index) => {
             const { created, text, user } = annotation;
-
             // const selector = target[0].selector;
             // const highlight = selector[selector.length - 1].exact;
 
@@ -125,9 +122,11 @@ const Annotations = (props: Props): JSX.Element => {
           })}
         </ul>
       </div>
-      <footer>
-        <h4>Add an Annotation</h4>
-        {renderForm()}
+      <footer className="Annotations__footer">
+        <div>
+          <h4>Add an Annotation</h4>
+          {renderForm()}
+        </div>
       </footer>
     </div>
   );

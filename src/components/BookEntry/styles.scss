@@ -1,34 +1,52 @@
 @use "sass:map";
+
 @import "../../assets/styles/styles";
+@import "../../assets/styles/variables";
 
 /**
  * BookEntry
  */
 
 .BookEntry {
+  border-bottom: 1px solid #dbdbdb;
+  overflow-y: auto;
+}
+
+.BookEntry__section {
   @media (min-width: map.get($breakpoints, "medium")) {
     display: flex;
     width: 50%;
+
+    aside {
+      margin-right: 1rem;
+    }
   }
 
-  background-color: #ececec;
-  border-bottom: 1px solid #dbdbdb;
-  overflow-y: auto;
-  padding: 1rem;
+  height: calc(100vh - #{$header_height});
+  // padding: 1rem;
 
   aside {
-    margin-right: 1rem;
+    padding: 1rem;
   }
 
   img {
     border: 1px solid #2e2e2e;
+    margin-bottom: 1rem;
     width: inherit;
   }
+}
 
-  section {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.BookEntry__details {
+  padding: 1rem;
+
+  @media (min-width: map.get($breakpoints, "medium")) {
+    p {
+      max-width: 60%;
+    }
+  }
+
+  h1 {
+    line-height: 100%;
     margin-top: 1rem;
   }
 }
@@ -38,19 +56,11 @@
  */
 
 .Annotations {
-  background-color: #ececec;
   border-top: 1px solid rgba(#000, 0.1);
-  padding-top: 1rem;
-  position: relative;
+  height: 50%;
 
-  > footer {
-    background-color: #ececec;
-    border-top: 1px solid #dbdbdb;
-    bottom: calc(-1rem - 1px); // compensate for padding-top of Annotations
-    margin-top: 1rem;
-    padding: 1rem;
-    position: absolute;
-    width: 100%;
+  h2 {
+    margin: 2rem 0 0 1rem;
   }
 }
 
@@ -58,8 +68,7 @@
   list-style: none;
   margin: 0;
   margin-bottom: calc(#{$footer_height} + 2rem);
-  margin-right: 1rem;
-  padding: 0;
+  padding: 1rem;
 }
 
 .Annotations__item {
@@ -68,7 +77,6 @@
   border-radius: 2px;
   box-shadow: 0 1px 1px rgba(#000, 0.1);
   margin-bottom: 1rem;
-  min-height: 10rem;
   padding: 1rem;
 
   header {
@@ -84,6 +92,25 @@
 }
 
 .Annotations__wrapper {
-  margin-bottom: $footer_height;
+  height: 100%;
   overflow-y: auto;
+  position: relative;
+}
+
+.Annotations__footer {
+  align-items: center;
+  background-color: #eee;
+  border-top: 1px solid #dbdbdb;
+  bottom: calc(-1rem - 1px); // compensate for padding-top of Annotations
+  display: flex;
+  height: 8rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  position: absolute;
+  width: 100%;
+  z-index: 100;
+
+  h4 {
+    margin-bottom: 0.5rem;
+  }
 }
