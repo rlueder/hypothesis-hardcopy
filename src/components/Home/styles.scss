@@ -1,5 +1,7 @@
 @use "sass:map";
+
 @import "../../assets/styles/styles";
+@import "../../assets/styles/variables";
 
 /**
  * Home
@@ -7,15 +9,6 @@
 
 .Home {
   height: inherit;
-}
-
-.Home__footer {
-  @media (max-width: map.get($breakpoints, "medium")) {
-    display: none;
-  }
-
-  background-color: #202020;
-  height: $footer_height;
 }
 
 .Home__section {

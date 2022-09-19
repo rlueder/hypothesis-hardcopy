@@ -18,7 +18,6 @@ const Home = (): JSX.Element => {
           Search for a book by ISBN or <br /> scan a barcode to get started.
         </p>
       </section>
-      <footer className="Home__footer" />
     </div>
   );
 };

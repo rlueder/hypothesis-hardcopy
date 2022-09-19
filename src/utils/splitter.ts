@@ -8,7 +8,6 @@ import { hyphenate } from "./beautify-isbn";
 
 const splitter = (isbn: string): string[] => {
   const hyphenated: string = hyphenate(isbn);
-  console.log(hyphenated);
   return hyphenated.split("-");
 };
 
