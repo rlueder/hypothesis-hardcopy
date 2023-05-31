@@ -1,5 +1,7 @@
 # hypothesis-hardcopy
 
+[Video - Social Annotations w/ Hypothesis](https://www.loom.com/embed/0d6523729f9648cba0189e04dff6447a)
+
 ### References
 
 [Annotate Physical Books/Magazines/Journals w/ Hypothesis](https://github.com/hypothesis/product-backlog/issues/1229)
